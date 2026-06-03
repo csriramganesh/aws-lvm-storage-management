@@ -8,10 +8,6 @@ The project simulates a real-world scenario where additional storage is required
 
 ---
 
-## Test Image
-
-![Test](screenshots/03-EBS-Volumes-Attached.png)
-
 ## Technologies Used
 
 * AWS EC2
