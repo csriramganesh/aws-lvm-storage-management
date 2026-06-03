@@ -93,14 +93,14 @@ Initialized the attached EBS volumes as LVM Physical Volumes.
 Commands:
 
 ```bash
-sudo pvcreate /dev/xvdf
-sudo pvcreate /dev/xvdg
+ pvcreate /dev/xvdf
+ pvcreate /dev/xvdg
 ```
 
 Verification:
 
 ```bash
-sudo pvs
+   pvs
 ```
 
 ![Physical Volumes Created](screenshots/05-Physical-Volumes-Created.png)
@@ -114,13 +114,13 @@ Combined the Physical Volumes into a single storage pool named `vg_data`.
 Command:
 
 ```bash
-sudo vgcreate vg_data /dev/xvdf /dev/xvdg
+ vgcreate vg_data /dev/xvdf /dev/xvdg
 ```
 
 Verification:
 
 ```bash
-sudo vgs
+  vgs
 ```
 
 ![Volume Group Created](screenshots/06-Volume-Group-Created.png)
@@ -134,13 +134,13 @@ Created a Logical Volume named `lv_data`.
 Command:
 
 ```bash
-sudo lvcreate -L 8G -n lv_data vg_data
+ lvcreate -L 8G -n lv_data vg_data
 ```
 
 Verification:
 
 ```bash
-sudo lvs
+ lvs
 ```
 
 ![Logical Volume Created](screenshots/07-Logical-Volume-Created.png)
@@ -155,12 +155,6 @@ Command:
 
 ```bash
 sudo mkfs.ext4 /dev/vg_data/lv_data
-```
-
-Verification:
-
-```bash
-sudo blkid /dev/vg_data/lv_data
 ```
 
 ![Filesystem Created](screenshots/08-Filesystem-Created.png)
@@ -230,17 +224,17 @@ Added the new EBS volume to the existing Volume Group.
 Commands:
 
 ```bash
-sudo pvcreate /dev/xvdh
+ pvcreate /dev/xvdh
 
-sudo vgextend vg_data /dev/xvdh
+ vgextend vg_data /dev/xvdh
 ```
 
 Verification:
 
 ```bash
-sudo vgs
+ vgs
 
-sudo pvs
+ pvs
 ```
 
 ![Volume Group Extended](screenshots/12-Volume-Group-Extended.png)
@@ -254,13 +248,13 @@ Extended the Logical Volume using the newly available storage.
 Command:
 
 ```bash
-sudo lvextend -l +100%FREE /dev/vg_data/lv_data
+ lvextend -l +100%FREE /dev/vg_data/lv_data
 ```
 
 Verification:
 
 ```bash
-sudo lvs
+ lvs
 ```
 
 ![Logical Volume Extended](screenshots/13-Logical-Volume-Extended.png)
@@ -291,14 +285,14 @@ df -h /data
 
 ```bash
 # Create Physical Volumes
-sudo pvcreate /dev/xvdf
-sudo pvcreate /dev/xvdg
+ pvcreate /dev/xvdf
+ pvcreate /dev/xvdg
 
 # Create Volume Group
-sudo vgcreate vg_data /dev/xvdf /dev/xvdg
+ vgcreate vg_data /dev/xvdf /dev/xvdg
 
 # Create Logical Volume
-sudo lvcreate -L 8G -n lv_data vg_data
+ lvcreate -L 8G -n lv_data vg_data
 
 # Create Filesystem
 sudo mkfs.ext4 /dev/vg_data/lv_data
@@ -307,11 +301,11 @@ sudo mkfs.ext4 /dev/vg_data/lv_data
 sudo mount /dev/vg_data/lv_data /data
 
 # Add New Storage
-sudo pvcreate /dev/xvdh
-sudo vgextend vg_data /dev/xvdh
+ pvcreate /dev/xvdh
+ vgextend vg_data /dev/xvdh
 
 # Extend Logical Volume
-sudo lvextend -l +100%FREE /dev/vg_data/lv_data
+ lvextend -l +100%FREE /dev/vg_data/lv_data
 
 # Resize Filesystem
 sudo resize2fs /dev/vg_data/lv_data
