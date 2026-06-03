@@ -196,10 +196,11 @@ Commands:
 
 ```bash
 cd /data
+mkdir devops
+cd devops
 
 echo "LVM Storage Project on AWS" > project.txt
 
-echo "Testing Logical Volume Storage" > notes.txt
 ```
 
 Verification:
